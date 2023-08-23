@@ -10,20 +10,6 @@ import Dashboard from './pages/Dashboard'
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <GuestLayout />,
-        children: [
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/signup',
-                element: <SignUp />
-            },
-        ]
-    },
-    {
-        path: '/',
         element: <AppLayout />,
         children: [
             {
@@ -37,6 +23,20 @@ const router = createBrowserRouter([
             {
                 path: '/users',
                 element: <Users />
+            },
+        ]
+    },
+    {
+        path: '/',
+        element: <GuestLayout />,
+        children: [
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/signup',
+                element: <SignUp />
             },
         ]
     },
