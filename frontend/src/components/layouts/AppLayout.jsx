@@ -4,7 +4,12 @@ import axiosClient from '../../clients/axios-client'
 import { useStateContext } from '../../contexts/ContextProvider'
 
 export default function AppLayout() {
-    const { user, token, setUser } = useStateContext()
+    const {
+        user,
+        token,
+        setUser,
+        setToken
+    } = useStateContext()
 
     const navigate = useNavigate()
 
@@ -20,8 +25,17 @@ export default function AppLayout() {
             })
     }, [token])
 
-    const onLogOut = (e) => {
+    const onLogOut = async (e) => {
         e.preventDefault()
+
+        try {
+            await axiosClient.post('/logout');
+
+            setUser({})
+            setToken(null)
+        } catch (error) {
+        }
+
     }
 
     return (
