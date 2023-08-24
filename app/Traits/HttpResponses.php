@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
@@ -73,5 +74,15 @@ trait HttpResponses
         $token = $user->createToken('bearer')->plainTextToken;
 
         return $this->success(compact('user', 'token'));
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function userData(User $user)
+    {
+        $user_data = new UserResource($user);
+
+        return $this->success($user_data);
     }
 }
