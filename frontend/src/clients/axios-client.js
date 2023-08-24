@@ -1,16 +1,16 @@
 import axios from "axios";
 
-const axiosClent = axios.create({
+const axiosClient = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
 });
 
-axiosClent.interceptors.request.use((config) => {
+axiosClient.interceptors.request.use((config) => {
   const token = localStorage.getItem("ACCESS_TOKEN");
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-axiosClent.interceptors.response.use(
+axiosClient.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -35,4 +35,4 @@ axiosClent.interceptors.response.use(
   }
 );
 
-export default axiosClent;
+export default axiosClient;

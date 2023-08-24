@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import axiosClent from '../../clients/axios-client'
+import axiosClient from '../../clients/axios-client'
 import { useStateContext } from '../../contexts/ContextProvider'
 import Errors from '../../components/layouts/shared/Errors'
 
@@ -25,7 +25,7 @@ export default function Signup() {
         }
 
         try {
-            const res = await axiosClent.post('/signup', payload);
+            const res = await axiosClient.post('/signup', payload);
             setUser(res?.data?.data?.user)
             setToken(res?.data?.data?.token)
         } catch (error) {

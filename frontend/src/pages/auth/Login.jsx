@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateContext } from '../../contexts/ContextProvider'
-import axiosClent from '../../clients/axios-client'
+import axiosClient from '../../clients/axios-client'
 import Errors from '../../components/layouts/shared/Errors'
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
         }
 
         try {
-            const res = await axiosClent.post('/login', payload);
+            const res = await axiosClient.post('/login', payload);
             setUser(res?.data?.data?.user)
             setToken(res?.data?.data?.token)
         } catch (error) {
