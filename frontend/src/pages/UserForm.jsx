@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axiosClient from '../clients/axios-client'
 import Errors from '../components/layouts/shared/Errors'
+import { useStateContext } from '../contexts/ContextProvider'
 
 export default function UserForm() {
     const { id } = useParams()
     const navigate = useNavigate()
+    const { setNotification } = useStateContext()
 
     const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState(null)
@@ -24,7 +26,6 @@ export default function UserForm() {
             axiosClient.get(`/users/${id}`)
                 .then(({ data }) => {
                     const { data: u } = data
-                    console.log({ data, user: u });
                     setUser((prevState) => ({
                         ...prevState,
                         id: u.id,
@@ -50,12 +51,15 @@ export default function UserForm() {
         e.preventDefault()
 
         try {
+            let message = ''
             if (user.id) {
-                await axiosClient.put(`/users/${user.id}`, user);
+                const res = await axiosClient.put(`/users/${user.id}`, user);
+                message = res.data?.message
             } else {
-                await axiosClient.post('/users', user);
+                const res = await axiosClient.post('/users', user);
+                message = res.data?.message
             }
-
+            if (message) setNotification(message)
             navigate('/users')
         } catch (error) {
             const response = error.response

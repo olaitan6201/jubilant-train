@@ -72,7 +72,7 @@ export default function Users() {
                                         <td>
                                             <Link to={`/users/${user.id}`} className='btn-edit'>Edit</Link>
                                             &nbsp;
-                                            <button type='button' onClick={() => { }} className='btn-delete'>Delete</button>
+                                            <button type='button' onClick={() => deleteUser(user)} className='btn-delete'>Delete</button>
                                         </td>
                                     </tr>
                                 ))

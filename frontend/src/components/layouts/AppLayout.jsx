@@ -8,7 +8,8 @@ export default function AppLayout() {
         user,
         token,
         setUser,
-        setToken
+        setToken,
+        notification
     } = useStateContext()
 
     const navigate = useNavigate()
@@ -62,6 +63,12 @@ export default function AppLayout() {
                     <Outlet />
                 </main>
             </div>
+
+            {notification &&
+                <div className='notification'>
+                    {notification}
+                </div>
+            }
         </div>
     )
 }
